@@ -1,11 +1,13 @@
 Uploads on OSX - william@william.co.il 03.2025
 
-This script uploads files with new random filename, original filename in a random subfolder or packaged as RAR or ZIP, encrypted if desired.
+This script uploads files with new random filename, original filename in a random subfolder or packaged as RAR or ZIP, also encrypted if desired.
+If ran on a folder it will automatically package it as ZIP or RAR (see config).
 By default the URL is automatically copied to the clipboard, a config option also enables password copy.
 Passwords are by default also saved in a local file with the filename and upload date.
 
-I also included an Automator workflow for screenshot creation/uploaded and context menu upload in Finder.
-See INSTALL file in this directory for usage and the workflow directory for Automator workflows (created on 10.12, but should not matter).
+I also included an Automator workflow for (area) screenshot creation/upload and context menu upload options incl. encryption and original filename in Finder context menu.
+Set Keyboard shortcuts to what you need (i have eg. cmd+alt+1 "Upload File" and cmd+alt+2 "Screenshot"
+See INSTALL file in this directory for usage and the workflow Zip for Automator workflows (tested on 10.15).
 
 Switches:
 -h / --help - This help output
