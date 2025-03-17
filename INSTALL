@@ -9,8 +9,16 @@ Install - Client:
 - Copy ulf binary to /usr/local/bin/ulf
 - If desired install one or more of the supplied workflows via Automator as "Service", allowing usage from context menu/setting shortcuts
 - Edit /usr/local/bin/ulf and add at least a server
+- Run uploads manually for testing and whitelisting of Disk Access etc. (see -h)
 
 Install - Server:
 - Run some webserver, apt-get install nginx should be mostly sufficient already, then upload to /var/www
 - SSH access should be ideally *not* root but webserver user or someone with chmod permissions, then set chmod line in the server config
+
+Install - Workflow/Service:
+- Copy all workflow files to ~/Library/Services/
+- Open each at least once with Automator
+- Restart Finder
+- Right click on a file/folder and it should appear
+
 
