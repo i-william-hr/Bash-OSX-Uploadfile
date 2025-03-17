@@ -1,4 +1,4 @@
-Uploads on OSX - william@william.co.il 12.2016
+Uploads on OSX - william@william.co.il 03.2025
 
 This script uploads files with new random filename, original filename in a random subfolder or packaged as RAR or ZIP, encrypted if desired.
 By default the URL is automatically copied to the clipboard, a config option also enables password copy.
