@@ -1,5 +1,5 @@
 Requires:
-- OSX 10.x
+- OSX 10.x (Tested 10.15, 03.2025)
 - rar binary in path if rar is used
 
 Highly recommended but not required:
@@ -8,7 +8,7 @@ Highly recommended but not required:
 Install - Client:
 - Copy ulf binary to /usr/local/bin/ulf
 - If desired install one or more of the supplied workflows via Automator as "Service", allowing usage from context menu/setting shortcuts
-- Edit /usr/local/bin/ulf and add at least a server
+- Edit /usr/local/bin/ulf and add at least one server
 - Run uploads manually for testing and whitelisting of Disk Access etc. (see -h)
 
 Install - Server:
