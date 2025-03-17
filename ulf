@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################
-#william@william.co.il 12.2016 #
-#1.0                           #
+#william@william.co.il 03.2025 #
+#1.1                           #
 #see -h/--help for usage       #
 ################################
 
@@ -34,13 +34,13 @@ tname="$(head -c 1024 /dev/urandom | md5)-$(/usr/local/bin/pwgen -A 10 1)"
 
 #server config, self explanatory
 if [ "$srvv" == "server1" ]; then
-	srvv_host="my.host.serv"
-	srvv_user="root"
-	srvv_key="/Users/william/.ssh/id_rsa"
-	srvv_path="/var/www/"
-	srvv_port="22"
-	srvv_url="https://my.host.serv"
-	chown="www-data:www-data"
+        srvv_host="i.xxx.li"
+        srvv_user="root"
+        srvv_key="/Users/William/.ssh/xxxx"
+        srvv_path="/var/www/i.xxx.li/"
+        srvv_port="22"
+        srvv_url="https://i.xxx.li"
+        chown="www-data:www-data"
 elif [ "$srvv" == "server2" ]; then
         srvv_host="10.4.5.12"
         srvv_user="ubuntu"
@@ -78,7 +78,7 @@ fi
 
 #help function
 function helpgen {
-echo "Uploads on OSX - william@william.co.il 12.2016"
+echo "Uploads on OSX - william@william.co.il 03.2025"
 echo ""
 echo "This script uploads files with new random filename, original filename in a random subfolder or packaged as RAR or ZIP, encrypted if desired."
 echo "By default the URL is automatically copied to the clipboard, a config option also enables password copy."
@@ -205,7 +205,7 @@ fi
 
 if [ -f "$ff" ]; then
 	ty=f
-elif [ -d "$ff" ]; then	
+elif [ -d "$ff" ]; then
 	ty=d
 else
 	echo "File/Dir does not exist"
@@ -265,11 +265,11 @@ if [ ! -z "$enc" ]; then
 	                echo "${passw}"
 	                echo ""
 		fi
-	else 
+	else
 		if [ -z "$pw_nosave" ]; then
                         echo "" >>${pwfile}
                         echo "${tname} ${srvv} $(date) ${passw}" >>${pwfile}
-		fi	
+		fi
 	fi
 	if [ "$pkgs" == "zip" ]; then
 		if [ "$cli" != "1" ]; then
