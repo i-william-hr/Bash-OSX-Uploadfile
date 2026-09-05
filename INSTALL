@@ -1,24 +1,40 @@
 Requires:
-- OSX 10.x (Tested 10.15, 03.2025)
-- rar binary in path if rar is used
+- macOS 10.15 (Catalina) through macOS 15+ (Sequoia)
+  Supported on both Apple Silicon (M1/M2/M3/M4) and Intel (x86_64) Macs
+- rar binary in PATH if RAR packaging is used (optional, ZIP is the default)
 
-Highly recommended but not required:
-- "terminal-notifier" from homebrew as it gives much nicer upload info (status, size..) as notification popup and not ugly "OK" "Cancel" windows...
+Notifications:
+- Native macOS Notification Center banner notifications work out-of-the-box
+  via built-in AppleScript (`display notification`) without external dependencies.
+- Optional: "terminal-notifier" is also supported if installed via Homebrew.
 
 Install - Client:
-- Copy ulf binary to /usr/local/bin/ulf
-- If desired install one or more of the supplied workflows via Automator as "Service", allowing usage from context menu/setting shortcuts
-- Edit /usr/local/bin/ulf and add at least one server
-- Run uploads manually for testing and whitelisting of Disk Access etc. (see -h)
+1. Copy `ulf` binary to your PATH:
+   - On Intel Macs: `sudo cp ulf /usr/local/bin/ulf && sudo chmod +x /usr/local/bin/ulf`
+   - On Apple Silicon: `sudo cp ulf /opt/homebrew/bin/ulf && sudo chmod +x /opt/homebrew/bin/ulf`
+   - Or for single user (no sudo): `mkdir -p ~/.local/bin && cp ulf ~/.local/bin/ulf && chmod +x ~/.local/bin/ulf`
+2. Edit `ulf` and configure your server details in the server config section.
+3. Test upload manually via terminal (e.g. `ulf -i /path/to/test.txt`).
+
+Install - Workflow / Quick Actions (Finder Integration):
+1. Copy all workflow packages to `~/Library/Services/`:
+   `cp -R Workflows/*.workflow ~/Library/Services/`
+2. Open each workflow at least once in Automator to register it with macOS.
+3. In Finder, right-click on any file or folder -> check the "Quick Actions" menu.
+4. (Optional) Assign Keyboard Shortcuts:
+   - Open System Settings -> Keyboard -> Keyboard Shortcuts -> Services (or Quick Actions)
+   - Locate the upload and screenshot actions and set your preferred shortcuts (e.g. Cmd+Alt+1, Cmd+Alt+2).
+
+macOS Permissions (System Settings -> Privacy & Security):
+- Screen Recording:
+  Required for `Screenshot.workflow` so `screencapture` can record your screen/selection.
+  Go to System Settings -> Privacy & Security -> Screen & System Audio Recording (or Screen Recording)
+  and ensure Automator / Finder / Terminal has permission.
+- Files and Folders / Full Disk Access:
+  If uploading files from protected folders (~/Desktop, ~/Documents, ~/Downloads),
+  ensure Finder / Automator has file access permissions when prompted.
 
 Install - Server:
-- Run some webserver, apt-get install nginx should be mostly sufficient already, then upload to /var/www
-- SSH access should be ideally *not* root but webserver user or someone with chmod permissions, then set chmod line in the server config
-
-Install - Workflow/Service:
-- Copy all workflow files to ~/Library/Services/
-- Open each at least once with Automator
-- Restart Finder
-- Right click on a file/folder and it should appear
-
-
+- Webserver: Any HTTP/HTTPS server (nginx, caddy, apache). Upload directory e.g. `/var/www/`
+- SSH: Non-root user with permissions to write and chmod uploaded files.
+- HTTP/1.1, HTTP/2, and HTTP/3 are all fully supported for upload verification.

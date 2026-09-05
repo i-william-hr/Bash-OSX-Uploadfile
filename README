@@ -1,24 +1,33 @@
-Uploads on OSX - william@william.co.il 03.2025
+Uploads on macOS - william@william.co.il 03.2025 (Updated for modern macOS)
 
-This script uploads files with new random filename, original filename in a random subfolder or packaged as RAR or ZIP, also encrypted if desired.
-If ran on a folder it will automatically package it as ZIP or RAR (see config).
-By default the URL is automatically copied to the clipboard, a config option also enables password copy.
-Passwords are by default also saved in a local file with the filename and upload date.
+This script uploads files with a random filename, original filename in a random subfolder, or packaged as RAR or ZIP (with encryption if desired).
+- If run on a directory, it automatically packages it as ZIP (default) or RAR.
+- Directories are packaged relative to their parent folder, keeping the archive clean without leaking absolute system paths.
+- By default, the URL is automatically copied to the clipboard without trailing newlines.
+- Passwords are automatically generated (using pwgen or secure native macOS /dev/urandom fallback) and saved locally in ~/.upl.
+- Works natively on macOS 10.15 through macOS 15+ (Sequoia) on both Apple Silicon and Intel Macs.
 
-I also included an Automator workflow for (area) screenshot creation/upload and context menu upload options incl. encryption and original filename in Finder context menu.
-Set Keyboard shortcuts to what you need (i have eg. cmd+alt+1 "Upload File" and cmd+alt+2 "Screenshot"
-See INSTALL file in this directory for usage and the workflow Zip for Automator workflows (tested on 10.15).
+Automator Workflows / Quick Actions:
+- Screenshot: Interactive area screenshot capture, instant upload, and clipboard copy.
+- Upload: Upload selected files/folders from Finder right-click context menu.
+- Upload File or Folder - Encrypted: Upload with random password encryption.
+- Upload File or Folder - Original Filename: Preserve original filename in a random remote subfolder.
+- Notifications work out-of-the-box using native macOS Notification Center banners (no external notifier required).
 
 Switches:
--h / --help - This help output
--c / --cli - CLI mode for eg. shell usage, returns only URL on stdout if successful or exits with 1
--i / --input - File to upload, full path or sub path of local dir. USE QUOTES, do not escape.
--nc / --nocopy - Do not copy file URL to clipboard, only stdout it
--o / --original - Keep original filename, in case of folder or packaged the filename/dir name and archive extension in a subfolder for this upload only.
--p / --package -  enable packaging of file
--e / --encrypt - Encrypt file. Enables packaging if not done by switch automatically.
--cp / --copypassword - Copy password after link into clipboard. Default is enabled.
--nsp - Do not save password to local file (Set: ~/.upl). Default is set in var in script.
--rar - Use RAR format instead of ZIP (default). Supports encryption also.
--t / --tmpdir - Set temporary ZIP/RAR directory. Default is set in var in script.
--automator - Echo a simple Automator service Shell script for usage in OSX GUI/services
+-h / --help              - This help output
+-c / --cli               - CLI mode for shell/script usage: prints only the URL (and password) to stdout or exits with code 1
+-i / --input             - File or directory to upload (full or relative path; quotes recommended)
+-s / --server            - Target server config to use (default: server1)
+-nc / --nocopy           - Do not copy URL to clipboard, only output to terminal
+-o / --original          - Keep original filename in an isolated remote subfolder
+-p / --package           - Enable packaging (automatically enabled for directories)
+-e / --encrypt           - Encrypt package with a generated 32-character password
+-cp / --copypassword     - Copy password after URL into clipboard (default: enabled)
+-ncp / --nocopypassword  - Do not copy password into clipboard
+-nsp                     - Do not save password to local password file (~/.upl)
+-rar                     - Use RAR format instead of ZIP (default: ZIP)
+-t / --tmpdir            - Set temporary directory (default: $TMPDIR or /tmp)
+-automator               - Echo the Automator Quick Action shell script for Finder integration
+
+See INSTALL for installation and macOS permission setup.
